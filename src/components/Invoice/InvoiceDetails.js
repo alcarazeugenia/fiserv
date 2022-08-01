@@ -1,41 +1,64 @@
 import React from "react";
-import { Table, TableBody, TableHead, TableRow } from "@mui/material";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import InvoiceDetail from "./InvoiceDetail";
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: "13px",
-    fontWeight: 400,
-  },
+const Container = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  width: "100%",
 }));
 
-function createData(description, lineValue) {
-  return { description, lineValue };
-}
+const HorizontalContent = styled(Box)(({ theme }) => ({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+}));
 
-const rows = [
-  createData("Invoice nº :", "40-1203"),
-  createData("Due Date:", "07th June 2022"),
-];
+const InvoiceDetails = ({ invoiceInfo }) => {
+  const dateFormatted = new Date(invoiceInfo?.InvoiceDate?.value);
 
-const InvoiceDetails = () => {
   return (
-    <Table
-      sx={{ minWidth: "100%", minHeight: "100%" }}
-      aria-label="simple table"
-    >
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow key={row.description}>
-            <StyledTableCell component="th" scope="row">
-              {row.description}
-            </StyledTableCell>
-            <StyledTableCell align="left">{row.lineValue}</StyledTableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <Container>
+      <HorizontalContent>
+        <InvoiceDetail
+          label="Supplier:"
+          content={invoiceInfo?.VendorName?.value}
+        />
+        <InvoiceDetail
+          label="Invoice Date:"
+          //content={invoiceInfo?.InvoiceDate?.value}
+          content={dateFormatted.toDateString()}
+        />
+      </HorizontalContent>
+
+      <HorizontalContent>
+        <InvoiceDetail label="Shipping nº:" />
+        <InvoiceDetail
+          label="Purchase Order:"
+          content={invoiceInfo?.PurchaseOrder?.value}
+        />
+      </HorizontalContent>
+
+      <HorizontalContent sx={{ marginBottom: "20px" }}>
+        <InvoiceDetail
+          label="Ship to:"
+          content={invoiceInfo?.ShippingAddressRecipient?.value}
+        />
+        <InvoiceDetail label="Package nº:" />
+      </HorizontalContent>
+
+      <InvoiceDetail
+        label="Supplier Address:"
+        shortInputs={false}
+        content={invoiceInfo?.VendorAddress?.value}
+      />
+      <InvoiceDetail
+        label="Invoice to Address:"
+        shortInputs={false}
+        content={invoiceInfo?.CustomerAddress?.value}
+      />
+    </Container>
   );
 };
 

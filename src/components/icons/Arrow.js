@@ -1,0 +1,20 @@
+import React from "react";
+
+const Arrow = () => {
+  return (
+    <svg
+      width="9"
+      height="12"
+      viewBox="0 0 9 12"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2.01938 12L8.01938 6L2.01938 0L0.609375 1.41L5.18937 6L0.609375 10.59L2.01938 12Z"
+        fill="inherit"
+      />
+    </svg>
+  );
+};
+
+export default Arrow;

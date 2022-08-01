@@ -1,0 +1,16 @@
+.uploadButton {
+  width: 100%;
+  background: #a1b6c6;
+  height: 60px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.4s ease;
+}
+
+.uploadButton:hover {
+  background: #2f3841;
+  border: 2px solid #a1b6c6;
+}
